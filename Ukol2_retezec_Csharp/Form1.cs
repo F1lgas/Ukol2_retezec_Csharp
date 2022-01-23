@@ -16,5 +16,43 @@ namespace Ukol2_retezec_Csharp
         {
             InitializeComponent();
         }
+
+        private void zjistit_Click(object sender, EventArgs e)
+        {
+            cifry.Items.Clear();
+
+            string vstup2 = vstup.Text;
+            int cifra = 0;
+
+            if (vstup2 == "")
+            {
+                MessageBox.Show("Musíš zadat hodnoty!", "Error");
+            }
+            else
+            {
+                vstup2 = String.Join(" ", vstup2.Split(' ').Where(slovo => !String.IsNullOrWhiteSpace(slovo)));
+
+                string[] slova = (vstup.Text.Trim()).Split(' ');
+
+                foreach (string slovo in slova)
+                {
+                    if (slovo != "")
+                    {
+                        foreach (char znak in slovo)
+                        {
+                            if (znak >= '0' && znak <= '9')
+                            {
+                                cifry.Items.Add(slovo);
+                                cifra++;
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                vystup.Text = vstup2;
+                MessageBox.Show("Počet slov s ciframi: " + cifra, "Výsledek");
+            }
+        }
     }
 }
